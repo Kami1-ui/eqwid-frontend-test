@@ -1,0 +1,75 @@
+.gallery__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    padding-bottom: 30px;
+}
+
+.gallery__item {
+    position: relative;
+    height: 100px;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -webkit-transition: 0.3s all;
+    transition: 0.3s all;
+    padding: 2px;
+}
+
+.gallery__item:last-child {
+    flex-grow: 10;
+}
+
+.gallery__item:hover {
+    transform: scale(0.9);
+}
+
+.gallery__preview img {
+    max-height: 100%;
+    min-width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+@media (max-width: 435px) {
+    .gallery__row {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 435px) {
+    .gallery__preview img {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery__item {
+        height: 130px;
+    }
+}
+
+@media (max-width: 435px) {
+    .gallery__item {
+        height: auto;
+        min-height: 1px;
+        max-width: 100%;
+    }
+}
+
+.gallery__remove {
+    /* -webkit-transition: 0.3s all;
+    transition: 0.3s all;*/
+    font-size: 0;
+    position: absolute;
+    background: url(../../assets/icons/close.svg) center/10px 10px no-repeat;
+    top: 5px;
+    right: 5px;
+    height: 20px;
+    width: 20px;
+    padding: 5px;
+    background-color: #dc4040;
+    border-radius: 4px;
+}
