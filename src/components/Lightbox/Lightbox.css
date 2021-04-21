@@ -16,8 +16,6 @@
     -ms-flex-align: center;
     align-items: center;
     z-index: 3;
-    /* visibility: hidden;
-    opacity: 0;*/
 }
 
 .lightbox__overlay {
@@ -26,7 +24,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .lightbox__body {
@@ -40,6 +38,7 @@
     max-width: 100%;
     max-height: 90vh;
     min-height: 1px;
+    padding: 0 35px;
 }
 
 .lightbox__content {
@@ -73,6 +72,7 @@
     width: 10vw;
     height: 10vw;
     opacity: 0.6;
+    cursor: pointer;
 }
 
 .lightbox__prev {
