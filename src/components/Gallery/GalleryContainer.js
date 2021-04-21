@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import { getImages, showLightbox, nextImage, prevImage, hiddenLightbox, deleteImage, setImageInLoad, setDrag } from '../../redux/gallery-reducer';
 import Gallery from './Gallery';
 import Lightbox from '../Lightbox/Lightbox';
-import Preloader from '../Preloader/Preloader';
-import axios from 'axios';
 import DragArea from '../DragArea/DragArea';
 
 
@@ -43,20 +41,19 @@ class GaleryContainer extends React.Component {
 
         return <>
             <DragArea
-                drag={this.props.drag}
+                drag={this.props.isDrag}
                 dragStart={dragStart}
                 dragLeave={dragLeave}
                 onDrop={onDrop}
             />
 
-            <Preloader show={this.props.imageInLoad.length > 0} />
-
             <Gallery {...this.props} />
-            {this.props.lightboxShow ? <Lightbox
-                hide={this.props.hiddenLightbox}
-                next={this.props.nextImage}
-                prev={this.props.prevImage}
-                url={this.props.lightboxUrl} /> : null}
+            {this.props.lightboxUrl !== ''
+                ? <Lightbox
+                    hide={this.props.hiddenLightbox}
+                    next={this.props.nextImage}
+                    prev={this.props.prevImage}
+                    url={this.props.lightboxUrl} /> : null}
         </>
     }
 }
@@ -66,9 +63,9 @@ let mapStateToProps = (state) => {
         images: state.gallery.images,
         lightboxUrl: state.gallery.lightboxUrl,
         lightboxShow: state.gallery.lightboxShow,
-        trashToogle: state.gallery.trashToogle,
+        isTrashActive: state.gallery.isTrashActive,
         imageInLoad: state.gallery.imageInLoad,
-        drag: state.gallery.drag,
+        isDrag: state.gallery.isDrag,
     }
 }
 

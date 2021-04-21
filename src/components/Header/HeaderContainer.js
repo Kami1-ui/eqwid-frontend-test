@@ -47,7 +47,6 @@ class HeaderContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         inputUrl: state.gallery.inputUrl,
-        imageInLoad: state.gallery.imageInLoad
     }
 }
 

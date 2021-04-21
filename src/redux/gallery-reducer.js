@@ -1,26 +1,27 @@
 const GET_IMAGES = 'GET_IMAGES';
-const SHOW_LIGHTBOX = 'SHOW_LIGHTBOX';
-const NEXT_IMAGE = 'NEXT_IMAGE';
-const PREV_IMAGE = 'PREV_IMAGE';
-const HIDDEN_LIGHTBOX = 'HIDDEN_LIGHTBOX';
-const UPDATE_INPUT_URL = 'UPDATE_INPUT_URL';
 const LOAD_IMG = 'LOAD_IMG';
+
+const UPDATE_INPUT_URL = 'UPDATE_INPUT_URL';
 const SET_TRASH_TOOGLE = 'SET_TRASH_TOOGLE';
 const DELETE_IMAGE = 'DELETE_IMAGE';
 const SET_IMAGE_IN_LOAD = 'SET_IMAGE_IN_LOAD';
 const SET_DRAG = 'SET_DRAG';
 
+const SHOW_LIGHTBOX = 'SHOW_LIGHTBOX';
+const HIDDEN_LIGHTBOX = 'HIDDEN_LIGHTBOX';
+
+const NEXT_IMAGE = 'NEXT_IMAGE';
+const PREV_IMAGE = 'PREV_IMAGE';
+
 
 const initialState = {
     images: [],
     indexShowImage: 0,
-    lightboxUrl: "",
-    lightboxShow: false,
-    inputUrl: 'https://don16obqbay2c.cloudfront.net/frontend-test-task/gallery-images.json',
-    // inputUrl: 'https://www.imgonline.com.ua/examples/bee-on-daisy.jpg',
-    trashToogle: false, //isDelete
+    lightboxUrl: '',
+    inputUrl: '',
+    isTrashActive: false,
     imageInLoad: [],
-    drag: false
+    isDrag: false
 };
 
 const galleryReducer = (state = initialState, action) => {
@@ -40,7 +41,6 @@ const galleryReducer = (state = initialState, action) => {
         case SHOW_LIGHTBOX:
             return {
                 ...state,
-                lightboxShow: true,
                 lightboxUrl: state.images[action.index].url,
                 indexShowImage: action.index
             };
@@ -48,7 +48,7 @@ const galleryReducer = (state = initialState, action) => {
         case HIDDEN_LIGHTBOX:
             return {
                 ...state,
-                lightboxShow: false,
+                lightboxUrl: ''
             };
 
         case NEXT_IMAGE:
@@ -79,7 +79,7 @@ const galleryReducer = (state = initialState, action) => {
         case SET_TRASH_TOOGLE:
             return {
                 ...state,
-                trashToogle: !state.trashToogle
+                isTrashActive: !state.isTrashActive
             };
         case DELETE_IMAGE:
             return {
@@ -114,7 +114,7 @@ const galleryReducer = (state = initialState, action) => {
         case SET_DRAG:
             return {
                 ...state,
-                drag: action.value,
+                isDrag: action.value,
             };
         default:
             return state;

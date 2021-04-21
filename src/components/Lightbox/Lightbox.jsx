@@ -1,6 +1,5 @@
 import React from 'react';
 import './Lightbox.css';
-/*{(e) => e.key === 'ArrowRight' ? props.prev() : null}*/
 
 class Lightbox extends React.Component {
     constructor(props) {
@@ -12,7 +11,6 @@ class Lightbox extends React.Component {
         this.LightboxDiv.current.focus();
     }
 
-    //  onKeyDown={(e) => e.key === 'ArrowRight' ? this.props.next() : e.key === 'ArrowLeft' ? this.props.() : ''} 
     render() {
         return <div className="lightbox" tabIndex="0" ref={this.LightboxDiv}
             onKeyDown={(e) => {
