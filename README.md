@@ -1,4 +1,4 @@
-https://raw.githubusercontent.com/KamilProgram/eqwid-frontend-test/main/screenshot.jpg
+![Скриншот](https://raw.githubusercontent.com/KamilProgram/eqwid-frontend-test/main/screenshot.jpg)
 
 # Getting Started with Create React App
 
