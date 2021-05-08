@@ -49,7 +49,7 @@ class DragArea extends React.Component {
                     onDragLeave={e => dragLeave(e)}
                     onDragOver={e => dragStart(e)}
                 > <input multiple="multiple" type="file" id="input-file" name="img" onChange={onChangeInputFile} accept="image/jpeg,image/png,image/gif,json"></input>
-                    <label htmlFor="input-file" className="load-btn">Выберите файл</label> или перетащите чтобы загрузить файл</div>
+                    <label htmlFor="input-file" className="load-btn">Выберите файл</label> или перетащите чтобы загрузить</div>
             }
 
 
