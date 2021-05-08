@@ -3,13 +3,11 @@ import *as axios from 'axios';
 export const readImageAsDataUrl = file => {
     return new Promise((res, rej) => {
         const reader = new FileReader();
-
         reader.onload = e => res(e.target.result);
         reader.onerror = e => rej(e);
         reader.readAsDataURL(file);
     });
 };
-
 
 export const readTxt = file => {
     return new Promise((res, rej) => {
@@ -17,7 +15,6 @@ export const readTxt = file => {
         reader.readAsText(file);
         reader.onload = e => res(e.target.result);
         reader.onerror = e => rej(e);
-
     });
 };
 
