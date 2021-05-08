@@ -2,50 +2,75 @@ import React from 'react';
 import images from '../../assets/data/images.json'
 import './Gallery.css'
 import { connect } from 'react-redux';
-import { getImages, showLightbox, nextImage, prevImage, hiddenLightbox, deleteImage, setImageInLoad, setDrag } from '../../redux/gallery-reducer';
+import { loadJson, loadImage, showLightbox, nextImage, prevImage, hiddenLightbox, deleteImage, setImagesInLoad } from '../../redux/gallery-reducer';
 import Gallery from './Gallery';
 import Lightbox from '../Lightbox/Lightbox';
 import DragArea from '../DragArea/DragArea';
 
 
 class GaleryContainer extends React.Component {
+
     componentDidMount() {
-        this.props.getImages(images.galleryImages)
+        this.props.loadJson(images.galleryImages)
     }
 
     render() {
+        const readImg = file => {
+            return new Promise((res, rej) => {
+                const reader = new FileReader();
 
-        const dragStart = (e) => {
-            e.preventDefault();
-            this.props.setDrag(true);
-        }
-        const dragLeave = (e) => {
-            e.preventDefault();
-            this.props.setDrag(false);
-        }
-        const onDrop = (e) => {
-            e.preventDefault();
-            this.props.setDrag(false);
-
-            let files = [...e.dataTransfer.files];
-            const formData = new FormData();
-
-            files.forEach(f => {
-                //formData.append('file',f)
-                console.log(f);
+                reader.onload = e => res(e.target.result);
+                reader.onerror = e => rej(e);
+                reader.readAsDataURL(file);
             });
+        };
 
-            //axios.post('url',formData,opttions).then()
+        const getImage = (url) => {
+            return new Promise((res, rej) => {
+                let image = new Image();
+                image.src = url;
 
+                image.onload = () => res(this.props.loadImage(image));
+                image.onerror = () => rej(console.log(url + ' не удалось загрузить'));
+            })
+        }
+
+        const readJson = file => {
+            return new Promise((res, rej) => {
+                const reader = new FileReader();
+                reader.readAsText(file);
+                reader.onload = e => res(JSON.parse(e.target.result));
+                reader.onerror = e => rej(e);
+
+            });
+        };
+
+
+
+        const loadFiles = async files => {
+            if (files.length !== 0) {
+                const file = files[0];
+                switch (file.name.split('.').pop()) {
+                    case 'json':
+                        let json = await readJson(file);
+                        this.props.loadJson(json.galleryImages);
+                        break;
+
+                    case 'jpg':
+                    case 'png':
+                        let imgSrc = await readImg(file);
+                        getImage(imgSrc);
+                        break;
+
+                    default:
+                        console.log('неверный формат файла')
+                        return null;
+                }
+            }
         }
 
         return <>
-            <DragArea
-                drag={this.props.isDrag}
-                dragStart={dragStart}
-                dragLeave={dragLeave}
-                onDrop={onDrop}
-            />
+            <DragArea loadFiles={loadFiles} />
 
             <Gallery {...this.props} />
             {this.props.lightboxUrl !== ''
@@ -60,22 +85,21 @@ class GaleryContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        images: state.gallery.images,
+        galleryImages: state.gallery.galleryImages,
         lightboxUrl: state.gallery.lightboxUrl,
         lightboxShow: state.gallery.lightboxShow,
-        isTrashActive: state.gallery.isTrashActive,
-        imageInLoad: state.gallery.imageInLoad,
-        isDrag: state.gallery.isDrag,
+        editMode: state.gallery.editMode,
+        imagesInLoad: state.gallery.imagesInLoad,
     }
 }
 
 export default connect(mapStateToProps, {
-    getImages,
+    loadImage,
+    loadJson,
     showLightbox,
     nextImage,
     prevImage,
     hiddenLightbox,
     deleteImage,
-    setImageInLoad,
-    setDrag
+    setImagesInLoad,
 })(GaleryContainer)

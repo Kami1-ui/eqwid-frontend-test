@@ -17,6 +17,16 @@
     justify-content: center;
     text-align: center;
 }
+.drag-drop__area input {
+    display: none;
+}
+.load-btn {
+    cursor: pointer;
+    margin-right: 9px;
+    text-decoration: underline;
+}
+
+/* //background: url("../../assets/icons/trash.svg") center/20px 20px no-repeat; */
 .drop {
     background-color: #fff;
 }
