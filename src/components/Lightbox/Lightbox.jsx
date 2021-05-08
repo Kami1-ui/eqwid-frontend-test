@@ -24,8 +24,8 @@ class Lightbox extends React.Component {
                     case 'Escape':
                         this.props.hide();
                         break;
+                    default:
                 }
-
             }} >
             <div className="lightbox__overlay" onClick={() => this.props.hide()} ></div>
             <div className="lightbox__content">

@@ -15,6 +15,7 @@ class GaleryContainer extends React.Component {
         this.props.loadJson(images.galleryImages)
     }
 
+
     render() {
 
         const loadFiles = files => {
@@ -50,7 +51,7 @@ class GaleryContainer extends React.Component {
 
         return <>
             <DragArea loadFiles={loadFiles} />
-            <Gallery {...this.props} />
+            <Gallery {...this.props} widthCssContainer={890} minWidthCssContainer={320} paddingCssContainer={30} />
             {this.props.lightboxUrl !== ''
                 ? <Lightbox
                     hide={this.props.hiddenLightbox}

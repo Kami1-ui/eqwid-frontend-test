@@ -8,10 +8,6 @@ class Gallery extends React.Component {
         imgItemsSize: [],
         itemsCount: 0,
         minHeight: 96,
-
-        widthCssContainer: 890,
-        minWidthCssContainer: 320,
-        paddingCssContainer: 30,
     }
 
     setContainer = (width) => {
@@ -23,7 +19,7 @@ class Gallery extends React.Component {
     alignRows = (imgProportions, cssContainer) => {
         let startRow = 0;
 
-        let paddingCssContainer = this.state.paddingCssContainer;
+        let paddingCssContainer = this.props.paddingCssContainer;
         cssContainer = cssContainer - paddingCssContainer;
 
         let widthSumRow = 0;
@@ -66,19 +62,18 @@ class Gallery extends React.Component {
     }
 
     initialItems = () => {
-
         let newImgProportions = [];
         this.props.galleryImages.forEach(image => {
             newImgProportions.push(image.width / image.height)
         });
 
-        let widthCssContainer = this.state.widthCssContainer;
+        let widthCssContainer = this.props.widthCssContainer;
 
         if (window.screen.width < widthCssContainer) {
             widthCssContainer = window.screen.width;
         }
-        if (window.screen.width <= this.state.minWidthCssContainer) {
-            widthCssContainer = this.state.minWidthCssContainer;
+        if (window.screen.width <= this.props.minWidthCssContainer) {
+            widthCssContainer = this.props.minWidthCssContainer;
         }
 
         let newImgItemsSize = this.alignRows(newImgProportions, widthCssContainer);
@@ -94,15 +89,15 @@ class Gallery extends React.Component {
 
     updateScreenSize = () => {
 
-        if (window.innerWidth < this.state.widthCssContainer) {
+        if (window.innerWidth < this.props.widthCssContainer) {
             let newImgItemsSize = this.alignRows(this.state.imgProportions, window.innerWidth);
             this.setState({
                 imgItemsSize: [...newImgItemsSize]
             })
         }
 
-        if (window.innerWidth <= this.state.minWidthCssContainer) {
-            let newImgItemsSize = this.alignRows(this.state.imgProportions, this.state.minWidthCssContainer);
+        if (window.innerWidth <= this.props.minWidthCssContainer) {
+            let newImgItemsSize = this.alignRows(this.state.imgProportions, this.props.minWidthCssContainer);
             this.setState({
                 imgItemsSize: [...newImgItemsSize]
             })
@@ -114,11 +109,14 @@ class Gallery extends React.Component {
     }
 
     componentDidMount() {
+
         window.addEventListener('resize', this.updateScreenSize);
+        //this.getCssContainer();
         this.initialItems();
     }
     componentDidUpdate() {
         if (this.props.galleryImages.length !== this.state.itemsCount) {
+
             this.initialItems();
         }
     }
@@ -137,7 +135,7 @@ class Gallery extends React.Component {
 
                         {this.props.editMode && <button className="gallery__remove" onClick={() => this.props.deleteImage(i)}>Удалить</button>}
 
-                        {loading && <img src={preloader} className="gallery__preview" />}
+                        {loading && <img src={preloader} alt="preloader" className="gallery__preview" />}
 
                         <img src={img.url} alt="картинка" onLoad={() => this.props.setImagesInLoad(false, i)}
                             className={loading ? 'hide gallery__preview' : 'gallery__preview'}
