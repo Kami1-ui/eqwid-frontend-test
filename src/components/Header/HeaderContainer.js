@@ -1,6 +1,6 @@
-import *as axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
+import { getImage, getJson } from '../../promises/promises';
 import { loadImage, loadJson, setEditMode } from '../../redux/gallery-reducer';
 
 import Header from './Header';
@@ -12,53 +12,34 @@ class HeaderContainer extends React.Component {
         fileExtend: ''
     }
 
-
-
-
-    getJson = (url) => {
-        axios.get(url)
-            .then(response => {
-
-                let images = response.data.galleryImages;
-                this.props.loadJson(images);
-            })
-            .catch(error => {
-                alert('Json файл не найден');
-            }
-            )
-    }
-
-    getImage = (url) => {
-        return new Promise((res, rej) => {
-            let image = new Image();
-            image.src = url;
-
-            image.onload = () => res(this.props.loadImage(image));
-            image.onerror = () => rej(console.log(url + ' не удалось загрузить'));
-        })
-    }
-
-
     loadUrl = () => {
+
+        let url = this.state.inputUrl;
         switch (this.state.fileExtend) {
             case 'json':
-                this.getJson(this.state.inputUrl);
+                getJson(url).then(response => {
+                    this.props.loadJson(response);
+                }).catch(() => {
+                    alert('Не удалось загрузить json ' + url);
+                })
                 break;
 
             case 'jpg':
             case 'png':
-                // this.props.loadImage(this.state.inputUrl);
-                this.getImage(this.state.inputUrl);
+                getImage(url).then(response => {
+                    this.props.loadImage(response);
+                }).catch(() => {
+                    alert('Не удалось загрузить изображеение ' + url);
+                })
                 break;
 
             default:
-                console.log('Неверный формат файла')
+                alert('Неверный формат файла ' + url);
         }
     }
 
     updateInputUrl = (text) => {
         let ext = text.split('.').pop();
-
         this.setState({
             inputUrl: text,
             fileExtend: ext
@@ -72,7 +53,7 @@ class HeaderContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        // inputUrl: state.gallery.inputUrl,
+
     }
 }
 

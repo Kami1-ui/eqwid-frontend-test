@@ -17,6 +17,8 @@ const initialState = {
     editMode: false,
     indexShowImage: 0,
     lightboxUrl: '',
+
+
 };
 
 

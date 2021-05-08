@@ -16,6 +16,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    flex-wrap: wrap;
 }
 .drag-drop__area input {
     display: none;

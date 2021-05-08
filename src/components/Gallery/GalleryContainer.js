@@ -6,6 +6,7 @@ import { loadJson, loadImage, showLightbox, nextImage, prevImage, hiddenLightbox
 import Gallery from './Gallery';
 import Lightbox from '../Lightbox/Lightbox';
 import DragArea from '../DragArea/DragArea';
+import { getImage, readImageAsDataUrl, readTxt } from '../../promises/promises';
 
 
 class GaleryContainer extends React.Component {
@@ -15,63 +16,40 @@ class GaleryContainer extends React.Component {
     }
 
     render() {
-        const readImg = file => {
-            return new Promise((res, rej) => {
-                const reader = new FileReader();
 
-                reader.onload = e => res(e.target.result);
-                reader.onerror = e => rej(e);
-                reader.readAsDataURL(file);
-            });
-        };
-
-        const getImage = (url) => {
-            return new Promise((res, rej) => {
-                let image = new Image();
-                image.src = url;
-
-                image.onload = () => res(this.props.loadImage(image));
-                image.onerror = () => rej(console.log(url + ' не удалось загрузить'));
-            })
-        }
-
-        const readJson = file => {
-            return new Promise((res, rej) => {
-                const reader = new FileReader();
-                reader.readAsText(file);
-                reader.onload = e => res(JSON.parse(e.target.result));
-                reader.onerror = e => rej(e);
-
-            });
-        };
-
-
-
-        const loadFiles = async files => {
-            if (files.length !== 0) {
-                const file = files[0];
+        const loadFiles = files => {
+            files.forEach(file => {
                 switch (file.name.split('.').pop()) {
                     case 'json':
-                        let json = await readJson(file);
-                        this.props.loadJson(json.galleryImages);
+                        readTxt(file).then(response => {
+                            this.props.loadJson(JSON.parse(response).galleryImages);
+                        }).catch(() => {
+                            alert('Не удалось загрузить ' + file.name);
+                        })
                         break;
 
                     case 'jpg':
                     case 'png':
-                        let imgSrc = await readImg(file);
-                        getImage(imgSrc);
+                        readImageAsDataUrl(file).then(src => {
+                            getImage(src).then(response => {
+                                this.props.loadImage(response);
+                            })
+                        }).catch(() => {
+                            alert('Не удалось загрузить ' + file.name);
+                        })
                         break;
 
                     default:
-                        console.log('неверный формат файла')
-                        return null;
+                        alert('Неверный формат файла');
                 }
-            }
+
+            });
+
+
         }
 
         return <>
             <DragArea loadFiles={loadFiles} />
-
             <Gallery {...this.props} />
             {this.props.lightboxUrl !== ''
                 ? <Lightbox

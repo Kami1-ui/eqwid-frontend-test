@@ -26,11 +26,8 @@ class DragArea extends React.Component {
         const onDrop = async event => {
             event.preventDefault();
             let files = [...event.dataTransfer.files];
-
-            if (this.props.loadFiles(files) === null) {
-                debugger
-                this.setDrop(false);
-            };
+            this.props.loadFiles(files);
+            this.setDrop(false);
         };
 
         const onChangeInputFile = event => {
@@ -51,7 +48,7 @@ class DragArea extends React.Component {
                     onDragStart={e => dragStart(e)}
                     onDragLeave={e => dragLeave(e)}
                     onDragOver={e => dragStart(e)}
-                > <input type="file" id="input-file" name="img" onChange={onChangeInputFile} accept="image/jpeg,image/png,image/gif,json"></input>
+                > <input multiple="multiple" type="file" id="input-file" name="img" onChange={onChangeInputFile} accept="image/jpeg,image/png,image/gif,json"></input>
                     <label htmlFor="input-file" className="load-btn">Выберите файл</label> или перетащите чтобы загрузить файл</div>
             }
 
