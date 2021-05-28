@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/KamilProgram/eqwid-frontend-test/static/css/main.2c1fb568.chunk.css",
+    "main.js": "/KamilProgram/eqwid-frontend-test/static/js/main.bac72939.chunk.js",
+    "main.js.map": "/KamilProgram/eqwid-frontend-test/static/js/main.bac72939.chunk.js.map",
+    "runtime-main.js": "/KamilProgram/eqwid-frontend-test/static/js/runtime-main.b3d8effb.js",
+    "runtime-main.js.map": "/KamilProgram/eqwid-frontend-test/static/js/runtime-main.b3d8effb.js.map",
+    "static/js/2.af00a1c7.chunk.js": "/KamilProgram/eqwid-frontend-test/static/js/2.af00a1c7.chunk.js",
+    "static/js/2.af00a1c7.chunk.js.map": "/KamilProgram/eqwid-frontend-test/static/js/2.af00a1c7.chunk.js.map",
+    "static/js/3.6e974cf5.chunk.js": "/KamilProgram/eqwid-frontend-test/static/js/3.6e974cf5.chunk.js",
+    "static/js/3.6e974cf5.chunk.js.map": "/KamilProgram/eqwid-frontend-test/static/js/3.6e974cf5.chunk.js.map",
+    "index.html": "/KamilProgram/eqwid-frontend-test/index.html",
+    "static/css/main.2c1fb568.chunk.css.map": "/KamilProgram/eqwid-frontend-test/static/css/main.2c1fb568.chunk.css.map",
+    "static/js/2.af00a1c7.chunk.js.LICENSE.txt": "/KamilProgram/eqwid-frontend-test/static/js/2.af00a1c7.chunk.js.LICENSE.txt",
+    "static/media/Gallery.css": "/KamilProgram/eqwid-frontend-test/static/media/close.79bd64a4.svg",
+    "static/media/Lightbox.css": "/KamilProgram/eqwid-frontend-test/static/media/right.67c7cff6.svg",
+    "static/media/logo.89d98d09.png": "/KamilProgram/eqwid-frontend-test/static/media/logo.89d98d09.png",
+    "static/media/Header.css": "/KamilProgram/eqwid-frontend-test/static/media/trash.8b6b7284.svg",
+    "static/media/preloader.dbb22bcf.gif": "/KamilProgram/eqwid-frontend-test/static/media/preloader.dbb22bcf.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b3d8effb.js",
+    "static/js/2.af00a1c7.chunk.js",
+    "static/css/main.2c1fb568.chunk.css",
+    "static/js/main.bac72939.chunk.js"
+  ]
+}
