@@ -85,8 +85,6 @@ class Gallery extends React.Component {
         })
     }
 
-
-
     updateScreenSize = () => {
 
         if (window.innerWidth < this.props.widthCssContainer) {
@@ -111,7 +109,6 @@ class Gallery extends React.Component {
     componentDidMount() {
 
         window.addEventListener('resize', this.updateScreenSize);
-        //this.getCssContainer();
         this.initialItems();
     }
     componentDidUpdate() {

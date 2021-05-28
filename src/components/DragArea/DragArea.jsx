@@ -1,5 +1,5 @@
 import React from 'react';
-import './DragArea.css'
+import './DragArea.scss'
 
 class DragArea extends React.Component {
     state = {
